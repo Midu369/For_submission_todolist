@@ -80,7 +80,7 @@ export default function Home() {
               >追加
             </button>
 
-            {click ? (
+            {click&&
               <div className='ml-5'>
                 {isSubmitted?(
                     <div>
@@ -92,17 +92,14 @@ export default function Home() {
                     必須項目を入力してください
                   </p>
                 )}
-              </div>
-            ):(
-              <p></p>
-            )}
+              </div>}
 
           </div>
           
           <div className='tab-area'>
             <div className='tab-list mt-5' role='tablist'>
               <button 
-                className='tab -active js-tab font-semibold bg-gray-400 peer'
+                className='tab -active js-tab font-semibold bg-gray-400 '
                 type='button'
                 role='tab'
                 id='tab1'
@@ -148,13 +145,13 @@ export default function Home() {
                 {yetTab&&<div>
                   {data.filter((chapter)=>(chapter.c!=true))
                   .map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
-                    <input className='mt-6 ml-5' type="checkbox"></input>
+                    <input className='mt-6 ml-5' type="checkbox" id='cheak1'onClick={()=>chapter.c=true}/>
                     <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
                     </div>))}</div>}
                 {comprateTab&&<div>
                   {data.filter((chapter)=>(chapter.c==true))
                   .map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
-                    <input className='mt-6 ml-5' type="checkbox"></input>
+                    <input className='mt-6 ml-5' type="checkbox" id='cheak1' onClick={()=>chapter.c=true}/>
                     <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
                     </div>))}</div>}
                   <div className='mt-10'/>
