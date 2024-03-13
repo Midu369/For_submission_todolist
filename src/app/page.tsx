@@ -1,60 +1,172 @@
+'use client'
+
 import { Base } from '@/components/Base/Base';
+import { log } from 'console';
 import Image from "next/image";
 import Link from 'next/link';
+import { useState } from 'react';
+import { isElement } from 'react-dom/test-utils';
 
 export default function Home() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [click, setClick] = useState(false);
+  const [title, setTitle] = useState("");
+  const [setumei, setSetumei] = useState("");
+  const [bothTab,setBothTab] = useState(true)
+  const [yetTab,setYetTab] = useState(false);
+  const [comprateTab,setComprateTab] = useState(false);
+  const [data,setData]= useState<{a:string,b:string,c:boolean}[]>([]);
+  //const data:{a:string;b:string}[];
+  
+
+  const onChangeTitle = (e:any) => {
+    setTitle(e.target.value);
+  };
+
+  const onChangeSetumei = (e:any) =>{
+    setSetumei(e.target.value);
+  };
+
+  const onSubmit = (e:any)=>{
+    e.preventDefault();
+    if(title !== ""){
+      setIsSubmitted(true);
+    }else{
+      setIsSubmitted(false);
+    }
+  };
+
   return (
-    /*
-    <div className='h-screen'>
-      <Base>
-        <p className='text-blue-600'>一行目</p>
-        pタグを使う場合Enterで改行ができる。
-        また、<br/>br/で改行ができる
-        <p>あいだに<span>spanタグ</span>を入れても改行は入らない</p>
-        <div className='flex flex-none'>
-          <img src = 'https://storage.googleapis.com/studio-design-asset-files/projects/7kadlQE8a3/s-510x142_webp_bc62b233-26b5-469d-bf21-9e0cc0e32862.webp' />
-          <img src = 'http://newgame-anime.com/assets/special/twticon/ng_icon_1.jpg'/>
-          <Link href='http://newgame-anime.com/'>リンク</Link> 
-        </div>
-        
-      </Base>
-    </div>
     
-   <div>
-    <Base>
-      <p className='text-red-600 text-center text-[40px]'>サービス</p>
-      <div className='flex flex-col mt-5'>
-        <div className='flex ml-10'>
-          <img src='https://play-lh.googleusercontent.com/VYvJqGnrQiKkbbyLyMeiL-GM3go4tBIA64uVEGQazLXD4p_M3F45kHyt42o_6d5VXA' className='w-20 h-20'/>
-          <Link href='https://www.microsoft.com/ja-jp/edge/download?form=MA13FJ' className='text-[30px]'>Edge</Link>
-          <div className='ml-10'/>
-          <img src='https://play-lh.googleusercontent.com/QRRGW2tMZ4-FNw0XWk6WWiXHaQCGxuwM-92HrBhlA4WOd_AGmjVmQkiHyAqQjW2yByc' className='w-20 h-20'/>
-          <Link href='https://www.google.com/intl/ja_jp/chrome/dr/download/?brand=GBSK&ds_kid=43700078516457171&gad_source=1&gclid=Cj0KCQjw-r-vBhC-ARIsAGgUO2BNUjKyF2w2D2FYk71XDsu5SDG8Oadb_iI6zew5eo8GhBSDccoqu2MaAlsUEALw_wcB&gclsrc=aw.ds' className='text-[30px]'>Google Chrome</Link>
-          <div className='ml-10'/>
-          <img src='https://play-lh.googleusercontent.com/I1foi2Irrv7tW9ee9kgP0wfnMzaVb6y17muvpKsFcUrKYsDlmCyWuTRh5m93KJZ24dY' className='w-20 h-20'/>
-          <Link href='https://play.google.com/store/apps/details?id=com.brave.browser&hl=ja' className='text-[30px]'>Brave</Link>
-        </div>
-      </div>
-      
-    </Base>
-   </div>
-   */
   <div>
     <Base>
-      <div className='text-[30px] ml-20'>My task</div>
-      <div className='ml-10'>
-        <div className='mt-5'>
-          タイトル<br/>
-          <input type='text' name="title"/>
+      <form onSubmit={onSubmit}>
+        <div className='text-[30px] font-bold ml-20'>My task</div>
+        <div className='ml-10'>
+          <div className='mt-5 w-2/5'>
+            タイトル
+            <text className="text-white bg-red-500 font-normal text-sm ml-2 p-0.5 rounded-md">
+              必須<br/>
+            </text>
+            <input
+              className='bg-gray-300 appearance-none border-gray-300 rounded w-full py-2 px-4 text-gray-600 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
+              type='text'
+              defaultValue=""
+              placeholder='タイトル'
+              onChange={onChangeTitle}
+              />
+          </div>
+          <div className='mt-5'>
+            説明<br/>
+            <textarea
+              id='other'  cols={30} rows={8} 
+              className='bg-gray-300 appearance-none border-gray-300 rounded w-full py-2 px-4 text-gray-600 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
+              placeholder='説明'
+              onChange={onChangeSetumei}
+              />
+          </div>
+
+
+          <div className='flex mt-5'>
+            <button
+              className='px-2 py-1 bg-gray-100 border border-blue-800 font-semibold hover:bg-blue-100'
+              type='submit'
+              onClick={()=>{
+                setClick(true)
+                const newData = {a:title,b:setumei,c:(false)};
+                const list = [...data,newData];
+                      setData(list)
+                }}
+              >追加
+            </button>
+
+            {click ? (
+              <div className='ml-5'>
+                {isSubmitted?(
+                    <div>
+                      タスクを追加しました
+                    </div>
+                  
+                ):(
+                  <p className='text-red-600'>
+                    必須項目を入力してください
+                  </p>
+                )}
+              </div>
+            ):(
+              <p></p>
+            )}
+
+          </div>
+          
+          <div className='tab-area'>
+            <div className='tab-list mt-5' role='tablist'>
+              <button 
+                className='tab -active js-tab font-semibold bg-gray-400 peer'
+                type='button'
+                role='tab'
+                id='tab1'
+                onClick={()=>{
+                    setBothTab(true)
+                    setYetTab(false)
+                    setComprateTab(false)
+                    console.log('1');
+                }}
+                >全て</button>
+              <button 
+                className='tab -active js-tab font-semibold ml-0.5 bg-gray-400 '
+                type='button'
+                role='tab'
+                id='tab2'
+                onClick={()=>{
+                  setBothTab(false)
+                  setComprateTab(false)
+                  setYetTab(true) 
+                  console.log('2');
+                }}
+                >未完了</button>
+              <button 
+                className='tab -active js-tab font-semibold ml-0.5 bg-gray-400 '
+                type='button'
+                role='tab'
+                id='tab3'
+                onClick={()=>{
+                  setBothTab(false)
+                  setComprateTab(true)
+                  setYetTab(false) 
+                  console.log('3');
+                }} 
+                >完了</button>
+                <label className=''/>
+                <div className='mt-5'>
+                {bothTab&&<div>
+                  {data.map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
+                    <input className='mt-6 ml-5' type="checkbox"></input>
+                    <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
+                    </div>))
+                    }</div>}
+                {yetTab&&<div>
+                  {data.filter((chapter)=>(chapter.c!=true))
+                  .map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
+                    <input className='mt-6 ml-5' type="checkbox"></input>
+                    <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
+                    </div>))}</div>}
+                {comprateTab&&<div>
+                  {data.filter((chapter)=>(chapter.c==true))
+                  .map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
+                    <input className='mt-6 ml-5' type="checkbox"></input>
+                    <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
+                    </div>))}</div>}
+                  <div className='mt-10'/>
+                </div>
+            </div>
+            <div>
+              
+            </div>
+
+          </div>
         </div>
-        <div className='mt-5'>
-          説明<br/>
-          <input type='text' name="explantation"/>
-        </div>
-        <div className='mt-5'>
-          <input type='submit'value="登録"/>
-        </div>
-      </div>
+      </form>
     </Base>
 
   </div>
