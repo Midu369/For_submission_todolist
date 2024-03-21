@@ -1,0 +1,35 @@
+/*
+    <div className='h-screen'>
+      <Base>
+        <p className='text-blue-600'>一行目</p>
+        pタグを使う場合Enterで改行ができる。
+        また、<br/>br/で改行ができる
+        <p>あいだに<span>spanタグ</span>を入れても改行は入らない</p>
+        <div className='flex flex-none'>
+          <img src = 'https://storage.googleapis.com/studio-design-asset-files/projects/7kadlQE8a3/s-510x142_webp_bc62b233-26b5-469d-bf21-9e0cc0e32862.webp' />
+          <img src = 'http://newgame-anime.com/assets/special/twticon/ng_icon_1.jpg'/>
+          <Link href='http://newgame-anime.com/'>リンク</Link> 
+        </div>
+        
+      </Base>
+    </div>
+    
+   <div>
+    <Base>
+      <p className='text-red-600 text-center text-[40px]'>サービス</p>
+      <div className='flex flex-col mt-5'>
+        <div className='flex ml-10'>
+          <img src='https://play-lh.googleusercontent.com/VYvJqGnrQiKkbbyLyMeiL-GM3go4tBIA64uVEGQazLXD4p_M3F45kHyt42o_6d5VXA' className='w-20 h-20'/>
+          <Link href='https://www.microsoft.com/ja-jp/edge/download?form=MA13FJ' className='text-[30px]'>Edge</Link>
+          <div className='ml-10'/>
+          <img src='https://play-lh.googleusercontent.com/QRRGW2tMZ4-FNw0XWk6WWiXHaQCGxuwM-92HrBhlA4WOd_AGmjVmQkiHyAqQjW2yByc' className='w-20 h-20'/>
+          <Link href='https://www.google.com/intl/ja_jp/chrome/dr/download/?brand=GBSK&ds_kid=43700078516457171&gad_source=1&gclid=Cj0KCQjw-r-vBhC-ARIsAGgUO2BNUjKyF2w2D2FYk71XDsu5SDG8Oadb_iI6zew5eo8GhBSDccoqu2MaAlsUEALw_wcB&gclsrc=aw.ds' className='text-[30px]'>Google Chrome</Link>
+          <div className='ml-10'/>
+          <img src='https://play-lh.googleusercontent.com/I1foi2Irrv7tW9ee9kgP0wfnMzaVb6y17muvpKsFcUrKYsDlmCyWuTRh5m93KJZ24dY' className='w-20 h-20'/>
+          <Link href='https://play.google.com/store/apps/details?id=com.brave.browser&hl=ja' className='text-[30px]'>Brave</Link>
+        </div>
+      </div>
+      
+    </Base>
+   </div>
+   */

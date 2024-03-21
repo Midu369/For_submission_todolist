@@ -1,66 +1,26 @@
+
+
 'use client'
-import { Base } from "@/components/Base/Base"
-import Link from "next/link"
-import React from "react"
-
-  const imageclick = (event:(string)) => {
-    const imageURL = event;
-    window.location.href = imageURL;
-  }
-  
-
-// app/title/[titleId]/page.tsx
-export default function TitleDetail(
-    { params }: { params: { titleId: string }} ){
-    return <div>
-      <Base>
-        <div className="flex flex-col justify-center items-center w-full h-screen text-xl">
-            <Link href='/title/0'>Todolist</Link>
-
-        </div>
-      </Base>
-    </div>
-  }
-// export default function Home() {
-//   return<>
-//     <img 
-//       className="w-[64px] h-[64px]"
-//       src="https://yt3.googleusercontent.com/ytc/AIdro_kzBHzRRKvl9R2NJy-Mh3GJIEZxTHfamhDF-EjjXw=s900-c-k-c0x00ffffff-no-rj" 
-//       onClick={() => {
-//         window.location.href = ("http://youtube.com")
-//       }}/>
-//   </>
-// }
-
-
-
-
-
-
-
-
-
-
-/*'use client'
 
 import { Base } from '@/components/Base/Base';
 import { log } from 'console';
 import Image from "next/image";
 import Link from 'next/link';
-import { useState } from 'react';
 import { isElement } from 'react-dom/test-utils';
+import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [click, setClick] = useState(false);
   const [title, setTitle] = useState("");
   const [setumei, setSetumei] = useState("");
-  const [bothTab,setBothTab] = useState(true)
-  const [yetTab,setYetTab] = useState(false);
-  const [comprateTab,setComprateTab] = useState(false);
+  type status = 1|2|3;
+  const [type,setType] = useState<status>(1)
+  // const [bothTab,setBothTab] = useState(true)
+  // const [yetTab,setYetTab] = useState(false)
+  // const [comprateTab,setComprateTab] = useState(false)
   const [data,setData]= useState<{a:string,b:string,c:boolean}[]>([]);
   //const data:{a:string;b:string}[];
-  
 
   const onChangeTitle = (e:any) => {
     setTitle(e.target.value);
@@ -78,12 +38,15 @@ export default function Home() {
       setIsSubmitted(false);
     }
   };
-
+  
   return (
     
   <div>
     <Base>
       <form onSubmit={onSubmit}>
+        <div className='text-right'>
+          <Link href='//' >戻る</Link>
+        </div>
         <div className='text-[30px] font-bold ml-20'>My task</div>
         <div className='ml-10'>
           <div className='mt-5 w-2/5'>
@@ -117,19 +80,21 @@ export default function Home() {
               onClick={()=>{
                 setClick(true)
                 const newData = {a:title,b:setumei,c:(false)};
-                const list = [...data,newData];
-                      setData(list)
-                }}
-              >追加
+
+                if(newData.a != ""){
+                  const list = [...data,newData];
+                  setData(list)
+                }
+                }}>
+                  追加
             </button>
 
             {click&&
               <div className='ml-5'>
                 {isSubmitted?(
-                    <div>
+                    <p>
                       タスクを追加しました
-                    </div>
-                  
+                    </p>
                 ):(
                   <p className='text-red-600'>
                     必須項目を入力してください
@@ -147,9 +112,7 @@ export default function Home() {
                 role='tab'
                 id='tab1'
                 onClick={()=>{
-                    setBothTab(true)
-                    setYetTab(false)
-                    setComprateTab(false)
+                    setType(1)
                     console.log('1');
                 }}
                 >全て</button>
@@ -159,9 +122,7 @@ export default function Home() {
                 role='tab'
                 id='tab2'
                 onClick={()=>{
-                  setBothTab(false)
-                  setComprateTab(false)
-                  setYetTab(true) 
+                  setType(2)
                   console.log('2');
                 }}
                 >未完了</button>
@@ -171,27 +132,26 @@ export default function Home() {
                 role='tab'
                 id='tab3'
                 onClick={()=>{
-                  setBothTab(false)
-                  setComprateTab(true)
-                  setYetTab(false) 
+                  setType(3)
                   console.log('3');
                 }} 
                 >完了</button>
-                <label className=''/>
+
                 <div className='mt-5'>
-                {bothTab&&<div>
+
+                {type == 1&&<div>
                   {data.map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
                     <input className='mt-6 ml-5' type="checkbox"></input>
                     <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
                     </div>))
                     }</div>}
-                {yetTab&&<div>
+                {type == 2&&<div>
                   {data.filter((chapter)=>(chapter.c!=true))
                   .map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
                     <input className='mt-6 ml-5' type="checkbox" id='cheak1'onClick={()=>chapter.c=true}/>
                     <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
                     </div>))}</div>}
-                {comprateTab&&<div>
+                {type == 3 &&<div>
                   {data.filter((chapter)=>(chapter.c==true))
                   .map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
                     <input className='mt-6 ml-5' type="checkbox" id='cheak1' onClick={()=>chapter.c=true}/>
@@ -200,10 +160,6 @@ export default function Home() {
                   <div className='mt-10'/>
                 </div>
             </div>
-            <div>
-              
-            </div>
-
           </div>
         </div>
       </form>
@@ -211,4 +167,4 @@ export default function Home() {
 
   </div>
   )
-}*/
+}
