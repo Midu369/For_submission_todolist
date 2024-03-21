@@ -80,7 +80,6 @@ export default function Home() {
               onClick={()=>{
                 setClick(true)
                 const newData = {a:title,b:setumei,c:(false)};
-
                 if(newData.a != ""){
                   const list = [...data,newData];
                   setData(list)
@@ -101,7 +100,6 @@ export default function Home() {
                   </p>
                 )}
               </div>}
-
           </div>
           
           <div className='tab-area'>
@@ -139,22 +137,22 @@ export default function Home() {
 
                 <div className='mt-5'>
 
-                {type == 1&&<div>
+                {type == 1 &&<div>
                   {data.map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
                     <input className='mt-6 ml-5' type="checkbox"></input>
                     <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
                     </div>))
                     }</div>}
-                {type == 2&&<div>
+                {type == 2 &&<div>
                   {data.filter((chapter)=>(chapter.c!=true))
                   .map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
-                    <input className='mt-6 ml-5' type="checkbox" id='cheak1'onClick={()=>chapter.c=true}/>
+                    <input className='mt-6 ml-5' type="checkbox" id='cheak1'onClick={()=>chapter.c=true} checked={false} />
                     <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
                     </div>))}</div>}
                 {type == 3 &&<div>
                   {data.filter((chapter)=>(chapter.c==true))
                   .map((chapter,index)=>(<div key={index} className='mt-5 w-4/5 h-20 bg-gray-200 border-gray-400 flex'>
-                    <input className='mt-6 ml-5' type="checkbox" id='cheak1' onClick={()=>chapter.c=true}/>
+                    <input className='mt-6 ml-5' type="checkbox" id='cheak1' onClick={()=>chapter.c=false} checked/>
                     <div className='ml-2 mt-3'>{'タイトル:'}{chapter.a}<br/>{'説明:'}{chapter.b}</div>
                     </div>))}</div>}
                   <div className='mt-10'/>
